@@ -38,6 +38,8 @@ private:
     static const unsigned short int SIXTY = 60;
     static const unsigned short int TEN = 10;
     static const unsigned short int ONE_DAY = 24;
+    static char day_dilimter;
+    static char time_dilimter;
 
     //************************** private methods ***************************//
 
@@ -68,6 +70,7 @@ public:
     //******************************** class methods ****************************//
     string get_as_str(bool) const;
     unsigned long get_time_by_seconds() const;
+    static void modify_dilimters(const char day,const char time);
     //********************************* operators *******************************//
 
     Time operator+(const Time &time) const;
@@ -79,6 +82,8 @@ public:
     const bool operator!=(const Time &time) const;
     const bool operator<=(const Time &time) const;
     const bool operator>=(const Time &time) const;
+    friend ostream& operator<<(ostream& os, const Time& time);
+
 };
 
 #endif
@@ -164,12 +169,12 @@ inline const bool Time::operator>(const Time &time) const
 
 inline const bool Time::operator>=(const Time &time) const
 {
-    return (*this > time) && (*this == time);
+    return (*this > time) || (*this == time);
 }
 
 inline const bool Time::operator<=(const Time &time) const
 {
-    return (*this < time) && (*this == time);
+    return (*this < time) || (*this == time);
 }
 //********************************* global functions *****************************//
 
