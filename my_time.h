@@ -35,11 +35,11 @@ private:
     //**********************************************************************//
 
     //******************* private static const members *********************//
-    static const unsigned short int SIXTY = 60;
-    static const unsigned short int TEN = 10;
-    static const unsigned short int ONE_DAY = 24;
-    static char day_dilimter;
-    static char time_dilimter;
+    static const unsigned short int SIXTY = 60;                          // define a 1 minutes as 60 seconds
+    static const unsigned short int TEN = 10;                            // define 10
+    static const unsigned short int ONE_DAY = 24;                        // define a 1 day as a 24 hours 
+    static char day_dilimter;                                            // day_dilimters holds the dilimter of a day
+    static char time_dilimter;                                           // time_dilimter hold the dilimter of a time
 
     //************************** private methods ***************************//
 
@@ -50,7 +50,7 @@ public:
     //************************** intilisation *******************************//
 
     Time();                                                                // defult ctor
-    Time(unsigned int hour, unsigned int minute, unsigned int second = 0); // a cnostructor that gets 3 elements (seconds are 0 by defult),in case of Invalid input -> throw anvalied excp
+    Time(unsigned int hour, unsigned int minute, unsigned int second = 0); // a cnostructor that gets 3 elements (seconds are 0 by defult),in case of Invalid input -> throw Invalied excp
     Time(unsigned long);                                                   // a ctor that gets a secound number and gets the hour,mintues , secounds
     Time(const Time &time);                                                // copy constructor
     
@@ -70,13 +70,13 @@ public:
     //***************************************************************************//
 
     //******************************** class methods ****************************//
-    string get_as_str(bool) const;
-    unsigned long get_time_by_seconds() const;
-    static void modify_dilimters(const char day,const char time);
+    string get_as_str(bool) const;                                // return the time as a string (with day display or with not -> depends in bool argument(is_day))
+    unsigned long get_time_by_seconds() const;                    // return the time as a sum of secounds
+    static void modify_dilimters(const char day,const char time); // modify the dilimter , in case of Illegal input -> it throw exception Invaled_argument 
     //********************************* operators *******************************//
 
-    Time operator+(const Time &time) const;
-    Time &operator+=(const Time &time);
+    Time operator+(const Time &time) const;                        // sum of 2 Times objects , by return new Time object that have the sum of seconds
+    Time &operator+=(const Time &time);                            // increase the time by other time object(by adding the ceound display of the seound time object)     
     Time &operator+=(const unsigned long seconds);
     const bool operator<(const Time &time) const;
     const bool operator>(const Time &time) const;

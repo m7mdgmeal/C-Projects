@@ -10,10 +10,12 @@ void run_timer_2()
 
         for (int i = 0; i < 10; i++)
         {
+            cout << "iteration number: " << i<< ": " << timer.get_clock() << endl;
+
             timer.tick();
             sleep(1);
 
-            cout << "iteration number: " << i + 1 << ": " << timer.get_clock() << endl;
+
         }
     }
     catch (const std::exception &e)
@@ -32,9 +34,10 @@ void run_timer_1()
 
         for (int i = 0; i < 50; i++)
         {
+            cout << "iteration number: " << i << ": " << timer.get_clock() << endl;
+
             timer.tick("Min", 2);
 
-            cout << "iteration number: " << i + 1 << ": " << timer.get_clock() << endl;
 
         }
     }
