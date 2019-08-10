@@ -40,7 +40,6 @@ Time::Time(const Time &time) : seconds(time.get_seconds() & MASK_MIN_SEC),
 // destractor //
 Time::~Time()
 {
-    cout << "I am a destructor of Timer" << endl;
 }
 
 

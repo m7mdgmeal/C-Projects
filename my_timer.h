@@ -3,7 +3,7 @@
 
 #define ONE_SECOUND 1
 #define ONE_MINUTES 60
-#define ONE_HOUR 3600 
+#define ONE_HOUR 3600
 #include "msg_printer.h"
 #include "my_time.h"
 
@@ -11,21 +11,19 @@ using namespace std;
 class Timer
 {
 private:
-
     Time target;
-    Time clock;                                                            
-    MsgPrinter *pprint;                                                    // member of class that is a pointer to object from MspPrint->it save to message of alarm 
+    Time clock;
+    MsgPrinter *pprint; // member of class that is a pointer to object from MspPrint->it save to message of alarm
     bool is_done();
-    void increse_clock(unsigned int secdons,string time_type="");          // incresing the clock by 1 minutes , 1 hour, 1 second , number of seconds of mix
-                                                                           // by the time_type
+    void increse_clock(unsigned int secdons, string time_type); // incresing the clock by 1 minutes , 1 hour, 1 second , number of seconds of mix
+                                                                // by the time_type
 public:
-
     Timer(const Time &tr, MsgPrinter *msg);
     ~Timer();
     void tick();
     void tick(unsigned int seconds);
-    void tick(const string time, unsigned int seconds =0);
-
+    void tick(const string time, unsigned int seconds = 1);
+    const Time &get_clock() const;
 };
 inline bool Timer::is_done()
 {
@@ -33,15 +31,29 @@ inline bool Timer::is_done()
 }
 inline void Timer::tick()
 {
-    is_done()? pprint->print():increse_clock(ONE_SECOUND);
+    if(is_done())
+     pprint->print(); 
+    increse_clock(ONE_SECOUND, string(""));
+
 }
 inline void Timer::tick(unsigned int seconds)
 {
-    is_done() ? pprint->print() : increse_clock(seconds);
+    if (is_done())
+        pprint->print();
+    increse_clock(seconds, string(""));
+
 }
-inline void Timer::tick(const string time,unsigned int seconds)
+inline void Timer::tick(const string time, unsigned int seconds)
 {
-    is_done() ? pprint->print():increse_clock(seconds,time);
+    if (is_done())
+        pprint->print();
+    increse_clock(seconds, time);
+
+}
+
+inline const Time &Timer::get_clock() const
+{
+    return this->clock;
 }
 
 #endif
