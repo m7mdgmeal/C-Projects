@@ -10,6 +10,7 @@ int main()
         Time time2(3659);
         
         Time copy=time1;
+        time2=time1+5;
         
         time1.modify_dilimters('.',':');
 

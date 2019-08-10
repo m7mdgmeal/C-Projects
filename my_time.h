@@ -49,9 +49,11 @@ private:
 public:
     //************************** intilisation *******************************//
 
+    Time();                                                                // defult ctor
     Time(unsigned int hour, unsigned int minute, unsigned int second = 0); // a cnostructor that gets 3 elements (seconds are 0 by defult),in case of Invalid input -> throw anvalied excp
     Time(unsigned long);                                                   // a ctor that gets a secound number and gets the hour,mintues , secounds
     Time(const Time &time);                                                // copy constructor
+    
     ~Time();                                                               // destructor
 
     //**************************************************************************//
@@ -74,8 +76,8 @@ public:
     //********************************* operators *******************************//
 
     Time operator+(const Time &time) const;
-    Time operator+=(const Time &time);
-    Time operator+=(const unsigned long seconds);
+    Time &operator+=(const Time &time);
+    Time &operator+=(const unsigned long seconds);
     const bool operator<(const Time &time) const;
     const bool operator>(const Time &time) const;
     const bool operator==(const Time &time) const;
@@ -132,12 +134,12 @@ inline unsigned long Time::get_time_by_seconds() const
 // *********************************************************************************************//
 // *********************************** operators ***********************************************//
 
-inline Time Time::operator+=(const Time &time)
+inline Time &Time::operator+=(const Time &time)
 {
     return (*this = (*this + time));
 }
 
-inline Time Time::operator+=(const unsigned long seconds)
+inline Time &Time::operator+=(const unsigned long seconds)
 {
     return (*this = (*this + seconds));
 }

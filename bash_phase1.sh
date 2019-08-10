@@ -3,4 +3,3 @@ g++ -ansi -std=c++03 -Wall -Werror -pedantic -Wconversion -c my_time.cpp testpha
 g++ -ansi -std=c++03 -Wall -Werror -pedantic -Wconversion -o run my_time.o testphase1.o
 valgrind ./run
 
-

@@ -11,6 +11,10 @@
 char Time::day_dilimter='.';
 char Time::time_dilimter=':';
 
+
+
+Time::Time():seconds(0&MASK_MIN_SEC) ,minutes(0&MASK_MIN_SEC) ,hours(0&MASK_HOUR){
+}
 // ctor with 3 arguments //
 
 Time::Time(unsigned int hour, unsigned int minute, unsigned int second) : seconds(valid(second, SECONDS) & MASK_MIN_SEC),
