@@ -1,19 +1,18 @@
 #include "my_time.h"
 
-
-
-
 //********************************************************************************************//
 //********************************************************************************************//
 //********************************* inilization decleration ********************************//
 
 // intilize statics
-char Time::day_dilimter='.';
-char Time::time_dilimter=':';
+char Time::day_dilimter = '.';
+char Time::time_dilimter = ':';
 
-
-
-Time::Time():seconds(0&MASK_MIN_SEC) ,minutes(0&MASK_MIN_SEC) ,hours(0&MASK_HOUR){
+// defult constructor
+Time::Time() : seconds(0 & MASK_MIN_SEC),
+               minutes(0 & MASK_MIN_SEC),
+               hours(0 & MASK_HOUR)
+{
 }
 // ctor with 3 arguments //
 
@@ -21,7 +20,6 @@ Time::Time(unsigned int hour, unsigned int minute, unsigned int second) : second
                                                                           minutes(valid(minute, MINUTES) & MASK_MIN_SEC),
                                                                           hours(valid(hour, HOURS) & MASK_HOUR)
 {
-
 }
 // ctor with 1 arguments //
 Time::Time(unsigned long secounds_number) : seconds((secounds_number % SIXTY) & MASK_MIN_SEC),
@@ -41,7 +39,6 @@ Time::Time(const Time &time) : seconds(time.get_seconds() & MASK_MIN_SEC),
 Time::~Time()
 {
 }
-
 
 //********************************************************************************************//
 //********************************************************************************************//
@@ -68,27 +65,25 @@ string Time::get_as_str(bool is_using_days) const
     char time_display[TEN + TEN];
     if (is_using_days == true)
     {
-        this->hours % ONE_DAY < TEN ? sprintf(time_display, "%d%c0%d%c", this->hours / ONE_DAY,this->day_dilimter ,this->hours % ONE_DAY,this->time_dilimter)
-                                    : sprintf(time_display, "%d%c%d%c", this->hours / ONE_DAY,this->day_dilimter ,this->hours % ONE_DAY,this->time_dilimter);
+        this->hours % ONE_DAY < TEN ? sprintf(time_display, "%d%c0%d%c", this->hours / ONE_DAY, this->day_dilimter, this->hours % ONE_DAY, this->time_dilimter)
+                                    : sprintf(time_display, "%d%c%d%c", this->hours / ONE_DAY, this->day_dilimter, this->hours % ONE_DAY, this->time_dilimter);
     }
     else
     {
-        this->hours < TEN ? sprintf(time_display, "0%d%c", this->hours,this->time_dilimter)
-                          : sprintf(time_display, "%d%c", this->hours,this->time_dilimter);
+        this->hours < TEN ? sprintf(time_display, "0%d%c", this->hours, this->time_dilimter)
+                          : sprintf(time_display, "%d%c", this->hours, this->time_dilimter);
     }
-    this->minutes < TEN ? sprintf(time_display, "%s0%d%c", time_display, this->minutes,this->time_dilimter)
-                        : sprintf(time_display, "%s%d%c", time_display, this->minutes,this->time_dilimter);
+    this->minutes < TEN ? sprintf(time_display, "%s0%d%c", time_display, this->minutes, this->time_dilimter)
+                        : sprintf(time_display, "%s%d%c", time_display, this->minutes, this->time_dilimter);
     this->seconds < TEN ? sprintf(time_display, "%s0%d", time_display, this->seconds)
                         : sprintf(time_display, "%s%d", time_display, this->seconds);
 
     return string(time_display);
 }
 
-
 // *********************************************************************************************//
 // *********************************************************************************************//
 // *********************************** operators ***********************************************//
-
 
 //************************* global operator +  for constant + time *****************************//
 Time operator+(const unsigned long seconds, const Time &time)
@@ -96,9 +91,9 @@ Time operator+(const unsigned long seconds, const Time &time)
     return time + seconds;
 }
 
-ostream& operator<<(ostream& os, const Time& time)
+ostream &operator<<(ostream &os, const Time &time)
 {
-    os<<time.get_as_str(true);
+    os << time.get_as_str(true);
     return os;
 }
 
@@ -108,10 +103,4 @@ ostream& operator<<(ostream& os, const Time& time)
 void print(const Time &other)
 {
     cout << other.get_hours() / 24 << "/" << other.get_hours() << "/" << other.get_minutes() << "/" << other.get_minutes() << endl;
-}
-
-void Time::modify_dilimters(const char day,const char time)
-{
-    (day>='0' && day<='9') ?throw invalid_argument("Delemiters are not nomirc") :day_dilimter=day;
-    (time>='0' && time<='9') ?throw invalid_argument("Delemiters are not nomirc") :time_dilimter=time;
 }

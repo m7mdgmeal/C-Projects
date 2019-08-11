@@ -178,6 +178,12 @@ inline const bool Time::operator<=(const Time &time) const
 {
     return (*this < time) || (*this == time);
 }
+
+inline void Time::modify_dilimters(const char day,const char time)
+{
+    (day>='0' && day<='9') ?throw invalid_argument("Delemiters are not nomirc") :day_dilimter=day;
+    (time>='0' && time<='9') ?throw invalid_argument("Delemiters are not nomirc") :time_dilimter=time;
+}
 //********************************* global functions *****************************//
 
 void print(const Time &other);
