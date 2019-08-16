@@ -5,6 +5,7 @@
 #include <string>
 #include <new>
 #include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -28,7 +29,6 @@ public:
     //*************************** Intialization methods *****************************//
     MsgPrinter();
     MsgPrinter(const string &message); // ctor that takes string as a string object
-    MsgPrinter(const char *message);   // ctor that takes string as a char * object
     MsgPrinter(const MsgPrinter &);    // c.ctor
     //**************************** destruction method *******************************//
     virtual ~MsgPrinter(); // dtor
@@ -40,6 +40,8 @@ public:
     virtual void print() const; // virtual print function , print the message
 };
 
+
+
 //*************************************************************************************************************//
 //*************************************************************************************************************//
 
@@ -50,11 +52,12 @@ public:
 //*************************************************************************************************************//
 
 // inherte from MsgPrinter a public inhertence
+
 class MsgPrinterSurrounding : public MsgPrinter
 {
 private:
-    //**************************** private members **********************************//
 
+    //**************************** private members ***********************************/ /
     char *m_before;                                            // a string that have the before message
     char *m_after;                                             // a string that have the after message
     void clone_msg(const char *base_msg, char **required_msg); // private funtion that alocate and clone strings
@@ -62,6 +65,7 @@ private:
     //*******************************************************************************//
 
 protected:
+
     //**************************** protected methods **********************************//
     virtual void print_before() const;
     void print_after() const;
@@ -75,7 +79,7 @@ public:
 
     MsgPrinterSurrounding(const string &, const char *, const char *); // ctor with 3 args, that intialize the Base class , before and after
     MsgPrinterSurrounding(const MsgPrinterSurrounding &);              // c.ctor that intialize the Base class , before and after
-    ~MsgPrinterSurrounding();                                          // dtor , that deletes before and after and destruct the object.
+    virtual ~MsgPrinterSurrounding();                                          // dtor , that deletes before and after and destruct the object.
 
     //****************************** operators *************************************//
     MsgPrinterSurrounding &operator=(const MsgPrinterSurrounding &); // operator assigment that clone the rigth object to the left one.
@@ -98,7 +102,7 @@ public:
 //***********************************************************************************//
 //***********************************************************************************//
 
-class MsgPrinterMultipleSurrounding : public MsgPrinterSurrounding
+class MsgPrinterMultipleSurrounding :public MsgPrinterSurrounding
 {
 private:
     unsigned char m_times;
@@ -111,7 +115,7 @@ public:
     MsgPrinterMultipleSurrounding(const string &, const char *, const char *, unsigned char = 2); // ctor with 4 or 3args, that intialize the Base class with
                                                                                                   // the first 3 args , the 4th arg is by defult 2, that init m_times
     MsgPrinterMultipleSurrounding(const MsgPrinterMultipleSurrounding &);                         // c.ctor that intialize the Base class , and m_times
-    ~MsgPrinterMultipleSurrounding();                                                             // dtor.
+    virtual ~MsgPrinterMultipleSurrounding();                                                             // dtor.
 
     void set_times(const unsigned char);
     const unsigned char get_times() const;
@@ -132,10 +136,6 @@ public:
 //************************************* inlines MsgPrinter Class **********************************************//
 //*************************************************************************************************************//
 
-inline void MsgPrinter::print() const // prints the message
-{
-    cout << "Message: " << this->message << endl;
-}
 
 inline const string MsgPrinter::get_message() const // gets the message
 {
@@ -151,10 +151,6 @@ inline void MsgPrinter::set_message(const string &msg) // set the message with m
 //********************************** inlines MsgPrinterSurrounding Class **************************************//
 //*************************************************************************************************************//
 
-inline void MsgPrinterSurrounding::print_before() const // prints the before string , if its null --> prints null
-{
-    this->m_before == NULL ? cout << "NULL" << endl : cout << this->m_before << endl;
-}
 
 inline void MsgPrinterSurrounding::print_after() const // prints the after string , if its null --> prints null
 {
@@ -184,3 +180,5 @@ inline const unsigned char MsgPrinterMultipleSurrounding::get_times() const     
 {
     return this->m_times;
 }
+
+

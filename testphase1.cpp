@@ -10,8 +10,9 @@ int main()
         Time time2(3659);
         
         Time copy=time1;
-        time2=time1+5;
-        
+        print(time1);
+        time2=5+time1;
+
         time1.modify_dilimters('.',':');
 
         cout<<"Time1 object: "<<time1<<"   "<<time1.get_as_str(false)<<endl;

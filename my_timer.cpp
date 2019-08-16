@@ -6,12 +6,11 @@ Timer::Timer(const Time &tr, MsgPrinter *msg) : target(tr), clock(0), pprint(msg
 
 }
 
+
 // dtor that prints the end of the Timer with the message
 Timer::~Timer()
 {
-    cout << "End of MsgPrinterMultipleSurrounding: ";
-    this->pprint->print();
-
+    cout << "End of Timer"<<endl;
 }
 
 
@@ -22,6 +21,7 @@ Timer::~Timer()
     * if time_type(time unit) is houes (with all the identifires of hours) --> increase the clock by number of hours(value is the number)
     * in other case throw and exception of Invalid_argument
 */
+
 void Timer::increse_clock(unsigned int value, string time_type)
 {
     if (time_type.empty())

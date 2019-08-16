@@ -36,8 +36,9 @@ public:
     //************************* initialization ********************************//
     // ctor that takes 2 arguments, the first argument to initialize the target and the other one to initialize the the pointer to pprint
     Timer(const Time &tr, MsgPrinter *msg);
+
     // detor
-    ~Timer();
+    virtual ~Timer();
     //*************************************************************************//
     //************************* class methods *********************************//
     void tick();                                                  // increasing clock by 1 seound
@@ -57,14 +58,14 @@ inline void Timer::tick()
 {
     if(is_done())                                                  // if clock reached to target --> prints the message of alarm 
      pprint->print(); 
-    increse_clock(ONE_SECOUND, string(""));                        // if not increase the clock by 1 second
+    increse_clock(ONE_SECOUND, "");                        // if not increase the clock by 1 second
 
 }
 inline void Timer::tick(unsigned int seconds)                                               
 {
     if (is_done())                                                 // if clock reached to target --> prints the message of alarm 
         pprint->print();
-    increse_clock(seconds, string(""));                            // if not increase the clock by number of seconds
+    increse_clock(seconds, "");                            // if not increase the clock by number of seconds
 
 }
 inline void Timer::tick(const string time, unsigned int value) 

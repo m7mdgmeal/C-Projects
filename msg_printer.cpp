@@ -11,15 +11,10 @@
 
 MsgPrinter::MsgPrinter()
 {
-    
 }
 
 //ctor that take a const refrencse to string object and initialize the messate with it
 MsgPrinter::MsgPrinter(const string &message) : message(message)
-{
-}
-//ctor char takes char * as a string and initialize the message string
-MsgPrinter::MsgPrinter(const char *message) : message(message)
 {
 }
 //copy ctor that takes const reference to MsgPrinter object and clone to the message the message in the object
@@ -30,6 +25,11 @@ MsgPrinter::MsgPrinter(const MsgPrinter &msgprint) : message(msgprint.get_messag
 MsgPrinter::~MsgPrinter()
 {
     cout << "End of MsgPrinter: " << this->message << endl;
+}
+
+void MsgPrinter::print() const // prints the message
+{
+    cout << "Message: " << this->message << endl;
 }
 
 //*************************************************************************************************************//
@@ -63,10 +63,14 @@ MsgPrinterSurrounding::MsgPrinterSurrounding(const MsgPrinterSurrounding &copy) 
 //dtor deltes the alocated memory and print nice destrunt message + prints the base message
 MsgPrinterSurrounding::~MsgPrinterSurrounding()
 {
+    cout << "End of MsgPrinterSorrounding:";
+    MsgPrinter::print();
     delete[] m_after;
     delete[] m_before;
-    cout << "End of MsgPrinterSorrounding";
-    MsgPrinter::print();
+}
+void MsgPrinterSurrounding::print_before() const // prints the before string , if its null --> prints null
+{
+    this->m_before == NULL ? cout << "NULL" << endl : cout << this->m_before << endl;
 }
 
 //*************************************************************************************************************//
@@ -77,6 +81,7 @@ void MsgPrinterSurrounding::print() const // override the print function from th
     this->print_before(); // prints the before msg
     MsgPrinter::print();  // prints the Base message
     this->print_after();  // prints the after message
+    cout<<endl;
 }
 
 //*************************************************************************************************************//
@@ -92,6 +97,7 @@ void MsgPrinterSurrounding::clone_msg(const char *base_msg, char **required_msg)
 //*************************************************************************************************************//
 //****************************** operators *************************************//
 // operator =
+
 MsgPrinterSurrounding &MsgPrinterSurrounding::operator=(const MsgPrinterSurrounding &msg_p_s)
 {
     delete[] this->m_after; // delete the alocated memory

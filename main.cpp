@@ -1,43 +1,30 @@
-#include "my_timer.h"
-#include <unistd.h>
+
 #include "testphase2.cpp"
 int main()
 {
-    //run_timer_1();
-    //run_timer_2();
-    run_timer_3();
-    /*
-    cout << "*****************************************" << endl;
-    cout << "*****************************************" << endl;
-    string msg = string("K_Base");
-    string msg1= string("L_Base");
+/*
+    run_timer_1();
+    cout<<"************************************"<<endl;
+    cout<<"************************************"<<endl;
+    cout<<"************************************"<<endl;
 
-    MsgPrinterSurrounding k(msg,"k_before" ,"K_after");
-    MsgPrinterSurrounding l(msg1,"l_before" ,"l_after");
+    run_timer_2();
 
-    cout << "*****************************************" << endl;
-    cout << "************* k object ******************" << endl;
-    cout << "*****************************************" << endl;
-    k.print();
-    cout << "*****************************************" << endl;
-    cout << "************* l object ******************" << endl;
-    cout << "*****************************************" << endl;
-    l.print();
+*/
+   //run_timer_3();
+   run_timer_4();
 
-    k=l;
-    cout << "*****************************************" << endl;
-    cout << "************* k object ******************" << endl;
-    cout << "*****************************************" << endl;
-    k.print();
-    cout << "*****************************************" << endl;
+  /* 
+    Time t1=Time(10);
+    Time t2=Time(5);
+    Time t3=Time(1128);
 
-
-
-    MsgPrinterMultipleSurrounding test1(msg,"b_test1","a_test1");
-    test1.set_times(5);
-    test1.print_before();
-    test1.MsgPrinter::print();
-    test1.print_after();
-    */
+    t1=t2+t3;
+    cout<<"operator +"<<endl;
+    t1+=t2;
+    cout<<"operator += with object"<<endl;
+    t1+=5;
+    cout<<"operator += with const"<<endl;
+*/
     return 0;
 }
