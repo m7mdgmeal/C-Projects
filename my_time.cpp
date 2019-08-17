@@ -33,6 +33,7 @@ Time::Time(const Time &time) : seconds_(time.get_seconds() & MASK_MIN_SEC),
                                minutes_(time.get_minutes() & MASK_MIN_SEC),
                                hours_(time.get_hours() & MASK_HOUR)
 {
+    cout<<"I am a copy ctor"<<endl;
 }
 
 // destractor //
