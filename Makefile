@@ -1,15 +1,33 @@
+TARGET=main
+
+SOURCES=$(wildcard *.cpp)
+
+OBJS=$(SOURCES:.cpp=.o)
+
+INC_DIR=.
 CC=g++
-CFLAGS= -ansi -std=c++03 -g -Wall -Werror -pedantic -Wconversion
-INCLUDE:= -Iheaders/
-SOURCE:=source/my_time.cpp \
-		source/my_timer.cpp \
-		source/msg_printer.cpp \
-		tests_folder/main.cpp \
+CFLAGS= -c -pedantic -Wall -Werror -Wconversion -ansi -std=c++03  -g -I$(INC_DIR)
+CXXFLAGS=$(CFLAGS)
+LDFLAGS= -g
 
-EXE= tests
+.PHONY: clean run gdb leak
 
-all:
-$(EXE):
-	$(CC) $(CFLAGS) $(INCLUDE) $(SOURCE) -o $(EXE)
+$(TARGET): $(OBJS)
+
+include .depends
+
+.depends:
+	$(CC) -MM -I$(INC_DIR) $(SOURCES) > .depends
+
 clean:
-	rm $(EXE)  
+	rm -f $(OBJS) $(TARGET) .depends
+
+run: $(TARGET)
+	./$(TARGET)
+
+gdb: $(TARGET)
+	gdb -q ./$(TARGET)
+leak: $(TARGET)
+	valgrind ./$(TARGET) --leak-check=full
+
+

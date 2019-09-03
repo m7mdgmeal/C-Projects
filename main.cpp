@@ -1,4 +1,7 @@
-#include"test_file.cpp"
+#include"test_file.h"
+#include<iostream>
+using std::cout;
+using std::endl;
 int main()
 {
     cout<< "************************************" << endl;
